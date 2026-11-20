@@ -1,0 +1,57 @@
+name: Auto-merge work branches
+
+# Every push to a work branch (any branch but main) is squashed into main,
+# the branch is deleted and the deploy/build of this repo is started.
+on:
+  push:
+    branches-ignore: ["main", "gh-pages"]
+
+permissions:
+  contents: write
+  actions: write
+  pages: write
+
+concurrency:
+  group: auto-merge-main
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH: ${{ github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Squash the branch into main
+        run: |
+          # the owner, taken from the first commit of main
+          OWNER_NAME=$(git log --reverse --format=%an | head -n1)
+          OWNER_EMAIL=$(git log --reverse --format=%ae | head -n1)
+          git config user.name "$OWNER_NAME"
+          git config user.email "$OWNER_EMAIL"
+          git fetch origin "$BRANCH"
+          # one short line (55 characters at most), never a trailer
+          msg=$(git log -1 --format=%s "origin/$BRANCH" | sed -E 's/[[:space:]]+$//' | cut -c1-55)
+          git merge --squash "origin/$BRANCH"
+          if git diff --cached --quiet; then
+            echo "Nothing new to merge"
+          else
+            git commit -m "$msg" --author="$OWNER_NAME <$OWNER_EMAIL>"
+            git push origin HEAD:main
+          fi
+
+      - name: Delete the branch
+        run: git push origin --delete "$BRANCH" || true
+
+      - name: Start the deploy / build
+        run: |
+          if [ "${{ github.repository }}" = "havihub/HaviHub" ]; then
+            gh workflow run release.yml --ref main --repo "${{ github.repository }}"
+          else
+            gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages build request failed (Pages may build from the push already)"
+          fi

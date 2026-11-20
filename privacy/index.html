@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es" data-en-doc-title="Privacy · Havi Hub">
+<head>
+<meta charset="utf-8">
+<script>
+// The language: the one picked with the button during this visit, or else the
+// first of the browser's languages that the site is written in (English if none).
+(function () {
+  var l = null, s = null;
+  try {
+    var q = new URLSearchParams(location.search).get("lang");
+    if (q === "es" || q === "en") sessionStorage.setItem("havihub-lang", q);
+    l = sessionStorage.getItem("havihub-lang");
+    s = sessionStorage.getItem("havihub-style");
+    localStorage.removeItem("havihub-lang");
+  } catch (e) {}
+  document.documentElement.setAttribute("data-style", s === "mr" ? "mr" : "cf");
+  if (l !== "es" && l !== "en") {
+    var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+    l = "en";
+    for (var i = 0; i < list.length; i++) {
+      var c = String(list[i]).slice(0, 2).toLowerCase();
+      if (c === "es" || c === "en") { l = c; break; }
+    }
+  }
+  document.documentElement.lang = l;
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacidad · Havi Hub</title>
+<meta name="description" content="Qué datos usan el sitio y la aplicación Havi Hub, y con qué servicios se conectan." data-en-content="What data the Havi Hub website and app use, and which services they connect to.">
+<meta name="theme-color" content="#0e0f12">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="canonical" href="https://havihub.github.io/privacy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Havi Hub">
+<meta property="og:url" content="https://havihub.github.io/privacy/">
+<meta property="og:title" content="Privacidad · Havi Hub">
+<meta property="og:description" content="Qué datos usan el sitio y la aplicación Havi Hub, y con qué servicios se conectan.">
+<meta property="og:image" content="https://havihub.github.io/assets/portada-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Havi Hub">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacidad · Havi Hub">
+<meta name="twitter:description" content="Qué datos usan el sitio y la aplicación Havi Hub, y con qué servicios se conectan.">
+<meta name="twitter:image" content="https://havihub.github.io/assets/portada-1200x630.png">
+<link rel="preload" href="/assets/fonts/hubot-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true"><symbol id="h-paths" viewBox="-0.5 -0.5 33 33"><path style="fill:var(--hr)" d="M8.35 2.55L11.00 -0.05L11.00 4.25L8.35 6.85ZM29.35 2.55L32.00 -0.05L32.00 4.25L29.35 6.85ZM8.35 6.75L11.00 4.15L11.00 8.45L8.35 11.05ZM29.35 6.75L32.00 4.15L32.00 8.45L29.35 11.05ZM8.35 10.95L11.00 8.35L11.00 12.65L8.35 15.25ZM29.35 10.95L32.00 8.35L32.00 12.65L29.35 15.25ZM29.35 15.15L32.00 12.55L32.00 16.85L29.35 19.45ZM8.35 19.35L11.00 16.75L11.00 21.05L8.35 23.65ZM29.35 19.35L32.00 16.75L32.00 21.05L29.35 23.65ZM8.35 23.55L11.00 20.95L11.00 25.25L8.35 27.85ZM29.35 23.55L32.00 20.95L32.00 25.25L29.35 27.85ZM8.35 27.75L11.00 25.15L11.00 29.45L8.35 32.05ZM29.35 27.75L32.00 25.15L32.00 29.45L29.35 32.05Z"/><path style="fill:var(--ht)" d="M-0.05 2.65L2.55 0.00L6.85 0.00L4.25 2.65ZM4.15 2.65L6.75 0.00L11.05 0.00L8.45 2.65ZM20.95 2.65L23.55 0.00L27.85 0.00L25.25 2.65ZM25.15 2.65L27.75 0.00L32.05 0.00L29.45 2.65ZM8.35 15.25L10.95 12.60L15.25 12.60L12.65 15.25ZM12.55 15.25L15.15 12.60L19.45 12.60L16.85 15.25ZM16.75 15.25L19.35 12.60L23.65 12.60L21.05 15.25Z"/><path style="fill:var(--hf)" d="M-0.05 2.55L4.25 2.55L4.25 6.85L-0.05 6.85ZM4.15 2.55L8.45 2.55L8.45 6.85L4.15 6.85ZM20.95 2.55L25.25 2.55L25.25 6.85L20.95 6.85ZM25.15 2.55L29.45 2.55L29.45 6.85L25.15 6.85ZM-0.05 6.75L4.25 6.75L4.25 11.05L-0.05 11.05ZM4.15 6.75L8.45 6.75L8.45 11.05L4.15 11.05ZM20.95 6.75L25.25 6.75L25.25 11.05L20.95 11.05ZM25.15 6.75L29.45 6.75L29.45 11.05L25.15 11.05ZM-0.05 10.95L4.25 10.95L4.25 15.25L-0.05 15.25ZM4.15 10.95L8.45 10.95L8.45 15.25L4.15 15.25ZM20.95 10.95L25.25 10.95L25.25 15.25L20.95 15.25ZM25.15 10.95L29.45 10.95L29.45 15.25L25.15 15.25ZM-0.05 15.15L4.25 15.15L4.25 19.45L-0.05 19.45ZM4.15 15.15L8.45 15.15L8.45 19.45L4.15 19.45ZM8.35 15.15L12.65 15.15L12.65 19.45L8.35 19.45ZM12.55 15.15L16.85 15.15L16.85 19.45L12.55 19.45ZM16.75 15.15L21.05 15.15L21.05 19.45L16.75 19.45ZM20.95 15.15L25.25 15.15L25.25 19.45L20.95 19.45ZM25.15 15.15L29.45 15.15L29.45 19.45L25.15 19.45ZM-0.05 19.35L4.25 19.35L4.25 23.65L-0.05 23.65ZM4.15 19.35L8.45 19.35L8.45 23.65L4.15 23.65ZM20.95 19.35L25.25 19.35L25.25 23.65L20.95 23.65ZM25.15 19.35L29.45 19.35L29.45 23.65L25.15 23.65ZM-0.05 23.55L4.25 23.55L4.25 27.85L-0.05 27.85ZM4.15 23.55L8.45 23.55L8.45 27.85L4.15 27.85ZM20.95 23.55L25.25 23.55L25.25 27.85L20.95 27.85ZM25.15 23.55L29.45 23.55L29.45 27.85L25.15 27.85ZM-0.05 27.75L4.25 27.75L4.25 32.05L-0.05 32.05ZM4.15 27.75L8.45 27.75L8.45 32.05L4.15 32.05ZM20.95 27.75L25.25 27.75L25.25 32.05L20.95 32.05ZM25.15 27.75L29.45 27.75L29.45 32.05L25.15 32.05Z"/></symbol></svg>
+<div class="backdrop" aria-hidden="true"></div>
+<a class="skip" href="#main"><span data-l="es">Saltar al contenido</span><span data-l="en">Skip to content</span></a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><svg class="h-mark" viewBox="-0.5 -0.5 33 33" aria-hidden="true"><use href="#h-paths"/></svg>Havi Hub</a>
+    <nav aria-label="Secciones" data-en-aria-label="Sections">
+      <a href="/#funciones"><span data-l="es">Funciones</span><span data-l="en">Features</span></a>
+      <a href="/#capturas"><span data-l="es">Capturas</span><span data-l="en">Screenshots</span></a>
+      <a href="/#descargar"><span data-l="es">Descargar</span><span data-l="en">Download</span></a>
+      <a href="/#donaciones"><span data-l="es">Donaciones</span><span data-l="en">Donate</span></a>
+      <a href="/#redes"><span data-l="es">Redes</span><span data-l="en">Social media</span></a>
+      <a class="nav-ext" href="/changelog/">Changelog<span class="ext" aria-hidden="true">↗</span></a>
+    </nav>
+    <div class="top-end">
+      <div class="seg" role="radiogroup" aria-label="Estilo" data-en-aria-label="Style"><button class="seg-opt" type="button" role="radio" data-style-pick="cf" aria-checked="true"><span class="seg-dot" aria-hidden="true"></span>CurseForge</button><button class="seg-opt" type="button" role="radio" data-style-pick="mr" aria-checked="false" tabindex="-1"><span class="seg-dot" aria-hidden="true"></span>Modrinth</button></div>
+      <a class="chip chip-gh" href="https://github.com/havihub/HaviHub" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.73.5.67 5.56.67 11.83c0 5.01 3.25 9.26 7.76 10.76.57.1.78-.25.78-.55v-1.93c-3.16.69-3.82-1.52-3.82-1.52-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.66 1.23 3.31.94.1-.73.4-1.23.72-1.52-2.52-.29-5.17-1.26-5.17-5.6 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.44.11-3 0 0 .95-.31 3.12 1.16a10.8 10.8 0 0 1 5.68 0c2.16-1.47 3.11-1.16 3.11-1.16.62 1.56.23 2.71.11 3 .73.79 1.17 1.8 1.17 3.04 0 4.35-2.66 5.31-5.19 5.59.41.35.77 1.04.77 2.1v3.11c0 .3.2.66.79.55a11.17 11.17 0 0 0 7.75-10.76C23.33 5.56 18.27.5 12 .5Z"/></svg><span>GitHub</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="doc">
+  <div class="wrap">
+    <a class="back" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m6-6-6 6 6 6"/></svg><span data-l="es">Volver al inicio</span><span data-l="en">Back to the home page</span></a>
+
+    <!-- ===================================================== Español -->
+    <article data-l="es">
+      <h1>Privacidad</h1>
+      <p class="updated">Última actualización: 18 de noviembre de 2026.</p>
+      <p class="lead">Esta página explica qué datos usan el sitio havihub.github.io y la aplicación Havi Hub, y con qué servicios se conectan. Havi Hub es un proyecto personal y de código abierto que hago yo, Havikun.</p>
+
+      <h2>En resumen</h2>
+      <ul>
+        <li>Havi Hub no tiene servidores propios, no muestra anuncios y no envía estadísticas ni datos de uso.</li>
+        <li>Tus cuentas, perfiles y ajustes se guardan solo en tu computador.</li>
+        <li>Para funcionar, la aplicación se conecta a servicios como Microsoft, Mojang, CurseForge, Modrinth y GitHub. Más abajo está la lista completa, con lo que hace en cada uno.</li>
+        <li>Mis redes en la página de Inicio se cargan solas solo si lo aceptas: la primera vez que abres Havi Hub te lo pregunta, y antes de eso no se conectan. También puedes hacer que se carguen solo cuando abres una, en Ajustes → Privacidad.</li>
+      </ul>
+
+      <h2>Este sitio web</h2>
+      <ul>
+        <li>Está alojado en GitHub Pages. Como cualquier servidor web, GitHub recibe tu dirección IP y los datos técnicos de cada visita; lo que hace con ellos lo explica la <a href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement">Declaración de privacidad de GitHub</a>.</li>
+        <li>Al abrir la página principal, tu navegador consulta la API de GitHub (<code>api.github.com</code>) para mostrar la última versión y el tamaño de cada archivo.</li>
+        <li>Las fuentes, imágenes e íconos se cargan desde este mismo sitio. No hay analíticas, píxeles de seguimiento ni publicidad, y el sitio no guarda cookies.</li>
+        <li>Si cambias el idioma con el botón, tu elección se guarda en tu navegador solo mientras la pestaña siga abierta.</li>
+        <li>El formulario de donaciones de Ko-fi se carga solo cuando presionas «Hacer una donación». Desde ese momento rige la <a href="https://more.ko-fi.com/privacy">política de privacidad de Ko-fi</a>, y el pago lo procesan Ko-fi y sus proveedores de pago: yo no recibo los datos de tu tarjeta ni de tu cuenta.</li>
+        <li>Los enlaces a mis redes y a otros sitios solo te llevan a ellos cuando haces clic.</li>
+      </ul>
+
+      <h2>La aplicación Havi Hub</h2>
+      <h3>Lo que se guarda en tu computador</h3>
+      <ul>
+        <li>Tus perfiles (instancias), con sus mundos, mods y capturas.</li>
+        <li>Tus cuentas de Minecraft. El inicio de sesión con Microsoft lo hace el motor de juego, Prism Launcher, con la aplicación de Havi Hub registrada en Microsoft, y la sesión queda guardada en la carpeta de datos de Havi Hub.</li>
+        <li>Tus ajustes de Havi Hub.</li>
+      </ul>
+      <p>Todo queda en la carpeta de datos de Havi Hub: <code>%APPDATA%\havihub</code> en Windows y <code>~/.config/havihub</code> en Linux. Puedes abrirla desde Ajustes → Minecraft → Carpeta de datos de Havi Hub.</p>
+
+      <h3>Con qué se conecta</h3>
+      <p>Cada uno de estos servicios recibe tu dirección IP al conectarse, como cualquier sitio que visitas, y tiene su propia política de privacidad.</p>
+      <table class="conn">
+        <thead><tr><th>Servicio</th><th>Para qué</th><th>Cuándo</th></tr></thead>
+        <tbody>
+          <tr><td>Microsoft y Xbox Live</td><td>Iniciar sesión con tu cuenta de Microsoft.</td><td>Cuando agregas una cuenta o se renueva la sesión.</td></tr>
+          <tr><td>Mojang<span class="hosts">api.minecraftservices.com, sessionserver.mojang.com, api.mojang.com, piston-meta.mojang.com y los servidores de descarga de Mojang</span></td><td>Tu perfil y tu skin, la lista de versiones del juego y los archivos que necesita para jugar.</td><td>Al iniciar sesión, al cambiar tu skin y al instalar o abrir un perfil. Si no tienes el juego, también la primera vez que abres Havi Hub.</td></tr>
+          <tr><td>CurseForge y Modrinth<span class="hosts">api.curseforge.com, api.modrinth.com y sus servidores de archivos e imágenes</span></td><td>Buscar, instalar y actualizar mods, modpacks y otros contenidos. La lista de la pestaña Servidores también viene de Modrinth. Si la descripción de un mod trae un video de YouTube, ese video se carga desde YouTube.</td><td>Cuando abres Inicio en el diseño de Modrinth (modpacks populares), Descubrir, Explorar, Servidores o el contenido de un perfil (para buscar actualizaciones), y cuando instalas o actualizas algo.</td></tr>
+          <tr><td>GitHub y Prism Launcher<span class="hosts">api.github.com, github.com, meta.prismlauncher.org</span></td><td>Descargar y actualizar el motor de juego, y las listas de versiones de Minecraft y de los cargadores de mods.</td><td>La primera vez que abres Havi Hub y cuando revisa si hay versiones nuevas.</td></tr>
+          <tr><td>Servidores de Minecraft</td><td>Mostrar su estado y su ping, y entrar a jugar.</td><td>Cuando ves la lista de servidores o entras a uno.</td></tr>
+          <tr><td>YouTube, Twitch y Linktree<span class="hosts">youtube.com, i.ytimg.com, gql.twitch.tv, static-cdn.jtvnw.net, linktr.ee</span></td><td>Mostrar mis redes en Inicio: mis últimos videos, si estoy en vivo y mis enlaces. Solo se descarga información pública de esos canales.</td><td>Poco después de abrir Havi Hub, una vez que respondiste la pregunta del primer inicio, y de nuevo al abrir una de ellas si pasaron más de 15 minutos. Con la carga automática desactivada, solo cuando abres una.</td></tr>
+          <tr><td>X, Instagram y TikTok</td><td>Mostrar mis perfiles dentro de la aplicación.</td><td>Solo cuando pasas el mouse sobre ellos o los abres. Con la carga automática desactivada, solo cuando los abres.</td></tr>
+          <tr><td>mclo.gs<span class="hosts">api.mclo.gs</span></td><td>Compartir un log para pedir ayuda con un error.</td><td>Solo cuando presionas el botón para subirlo.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Mis redes en Inicio</h3>
+      <p>La primera vez que abres Havi Hub, la bienvenida te pregunta si mis redes se cargan solas o solo cuando abres una (si actualizas desde una versión anterior, la pregunta aparece en un aviso). Hasta que respondas, no se conectan a nada. Después puedes cambiarlo cuando quieras en Ajustes → Privacidad. Con la carga automática desactivada, las redes siguen en Inicio, pero Havi Hub no se conecta a YouTube, Twitch, Linktree, X, Instagram ni TikTok hasta que abras una.</p>
+
+      <h3>Lo que Havi Hub no hace</h3>
+      <ul>
+        <li>No envía estadísticas, informes de errores ni identificadores de tu equipo.</li>
+        <li>No muestra anuncios.</li>
+        <li>No vende ni comparte tus datos: no tiene servidores donde recibirlos.</li>
+      </ul>
+
+      <h3>Cómo borrar tus datos</h3>
+      <ul>
+        <li>Desinstala Havi Hub como se explica en la <a href="/code-signing-policy/#desinstalar">Code signing policy</a>.</li>
+        <li>Al desinstalarlo, tus perfiles y cuentas se quedan en la carpeta de datos, por si lo vuelves a instalar. Para borrar todo, elimina esa carpeta.</li>
+        <li>Si también quieres revocar el acceso a tu cuenta de Microsoft, hazlo desde la configuración de privacidad de tu cuenta, en la lista de aplicaciones que tienen acceso a ella.</li>
+      </ul>
+
+      <h2>Cambios</h2>
+      <p>Si cambia lo que hacen el sitio o la aplicación, actualizaré esta página y su fecha. Todas las versiones anteriores están en el <a href="https://github.com/havihub/havihub.github.io/commits/main/privacy/index.html">historial de GitHub</a>.</p>
+
+      <h2>Contacto</h2>
+      <p>Si tienes dudas sobre esta página, abre un <a href="https://github.com/havihub/HaviHub/issues">issue en GitHub</a>.</p>
+    </article>
+
+    <!-- ===================================================== English -->
+    <article data-l="en">
+      <h1>Privacy</h1>
+      <p class="updated">Last updated: November 18, 2026.</p>
+      <p class="lead">This page explains what data the havihub.github.io website and the Havi Hub app use, and which services they connect to. Havi Hub is a personal, open-source project made by me, Havikun.</p>
+
+      <h2>In short</h2>
+      <ul>
+        <li>Havi Hub has no servers of its own, shows no ads and sends no statistics or usage data.</li>
+        <li>Your accounts, profiles and settings are only stored on your computer.</li>
+        <li>To work, the app connects to services such as Microsoft, Mojang, CurseForge, Modrinth and GitHub. The full list, with what it does on each one, is below.</li>
+        <li>My social media on the Home page loads on its own only if you agree: Havi Hub asks the first time you open it, and nothing connects before that. You can also have it load only when you open a channel, in Settings → Privacy.</li>
+      </ul>
+
+      <h2>This website</h2>
+      <ul>
+        <li>It is hosted on GitHub Pages. Like any web server, GitHub receives your IP address and the technical details of each visit; what it does with them is explained in the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</li>
+        <li>When you open the home page, your browser asks the GitHub API (<code>api.github.com</code>) for the latest version and the size of each file.</li>
+        <li>Fonts, images and icons are loaded from this same site. There are no analytics, tracking pixels or ads, and the site sets no cookies.</li>
+        <li>If you change the language with the button, your choice is kept in your browser only while the tab stays open.</li>
+        <li>The Ko-fi donation form only loads when you press “Make a donation”. From then on, <a href="https://more.ko-fi.com/privacy">Ko-fi's privacy policy</a> applies, and the payment is handled by Ko-fi and its payment providers: I never receive your card or account details.</li>
+        <li>Links to my social media and to other sites only take you there when you click them.</li>
+      </ul>
+
+      <h2>The Havi Hub app</h2>
+      <h3>What is stored on your computer</h3>
+      <ul>
+        <li>Your profiles (instances), with their worlds, mods and screenshots.</li>
+        <li>Your Minecraft accounts. Signing in with Microsoft is done by the game engine, Prism Launcher, with Havi Hub's app registered with Microsoft, and the session is kept in Havi Hub's data folder.</li>
+        <li>Your Havi Hub settings.</li>
+      </ul>
+      <p>Everything is kept in Havi Hub's data folder: <code>%APPDATA%\havihub</code> on Windows and <code>~/.config/havihub</code> on Linux. You can open it from Settings → Minecraft → Havi Hub data folder.</p>
+
+      <h3>What it connects to</h3>
+      <p>Each of these services receives your IP address when the app connects to it, like any site you visit, and has its own privacy policy.</p>
+      <table class="conn">
+        <thead><tr><th>Service</th><th>What for</th><th>When</th></tr></thead>
+        <tbody>
+          <tr><td>Microsoft and Xbox Live</td><td>Signing in with your Microsoft account.</td><td>When you add an account or the session is renewed.</td></tr>
+          <tr><td>Mojang<span class="hosts">api.minecraftservices.com, sessionserver.mojang.com, api.mojang.com, piston-meta.mojang.com and Mojang's download servers</span></td><td>Your profile and skin, the list of game versions and the files the game needs to run.</td><td>When you sign in, change your skin, and install or open a profile. If you don't have the game yet, also the first time you open Havi Hub.</td></tr>
+          <tr><td>CurseForge and Modrinth<span class="hosts">api.curseforge.com, api.modrinth.com and their file and image servers</span></td><td>Finding, installing and updating mods, modpacks and other content. The list in the Servers tab also comes from Modrinth. If a mod's description includes a YouTube video, that video loads from YouTube.</td><td>When you open Home in the Modrinth-style layout (popular modpacks), Discover, Browse, Servers or a profile's content (to look for updates), and when you install or update something.</td></tr>
+          <tr><td>GitHub and Prism Launcher<span class="hosts">api.github.com, github.com, meta.prismlauncher.org</span></td><td>Downloading and updating the game engine, and the lists of Minecraft and mod loader versions.</td><td>The first time you open Havi Hub and when it checks for new versions.</td></tr>
+          <tr><td>Minecraft servers</td><td>Showing their status and ping, and joining them.</td><td>When you look at the server list or join a server.</td></tr>
+          <tr><td>YouTube, Twitch and Linktree<span class="hosts">youtube.com, i.ytimg.com, gql.twitch.tv, static-cdn.jtvnw.net, linktr.ee</span></td><td>Showing my social media on the Home page: my latest videos, whether I'm live and my links. Only public information from those channels is downloaded.</td><td>Shortly after Havi Hub opens, once you have answered the first-start question, and again when you open one of them if more than 15 minutes have passed. With the automatic loading turned off, only when you open one.</td></tr>
+          <tr><td>X, Instagram and TikTok</td><td>Showing my profiles inside the app.</td><td>Only when you hover over them or open them. With the automatic loading turned off, only when you open them.</td></tr>
+          <tr><td>mclo.gs<span class="hosts">api.mclo.gs</span></td><td>Sharing a log to ask for help with an error.</td><td>Only when you press the button to upload it.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>My social media on the Home page</h3>
+      <p>The first time you open Havi Hub, the welcome asks whether my social media loads on its own or only when you open a channel (if you update from an earlier version, the question comes up in a dialog). Until you answer, nothing connects. You can change it at any time afterwards in Settings → Privacy. With the automatic loading turned off, the channels stay on the Home page, but Havi Hub does not connect to YouTube, Twitch, Linktree, X, Instagram or TikTok until you open one.</p>
+
+      <h3>What Havi Hub does not do</h3>
+      <ul>
+        <li>It sends no statistics, crash reports or identifiers of your computer.</li>
+        <li>It shows no ads.</li>
+        <li>It does not sell or share your data: it has no servers to receive it.</li>
+      </ul>
+
+      <h3>How to delete your data</h3>
+      <ul>
+        <li>Uninstall Havi Hub as explained in the <a href="/code-signing-policy/#uninstall">Code signing policy</a>.</li>
+        <li>Uninstalling leaves your profiles and accounts in the data folder, in case you install it again. To delete everything, delete that folder.</li>
+        <li>If you also want to revoke access to your Microsoft account, do it from your account's privacy settings, in the list of apps that can access it.</li>
+      </ul>
+
+      <h2>Changes</h2>
+      <p>If what the website or the app does changes, I will update this page and its date. Every earlier version is in the <a href="https://github.com/havihub/havihub.github.io/commits/main/privacy/index.html">GitHub history</a>.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions about this page, open an <a href="https://github.com/havihub/HaviHub/issues">issue on GitHub</a>.</p>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="links">
+        <a href="https://github.com/havihub/HaviHub"><span data-l="es">Código en GitHub</span><span data-l="en">Source code on GitHub</span></a>
+        <a href="https://github.com/havihub/HaviHub/issues"><span data-l="es">Reportar un problema</span><span data-l="en">Report a problem</span></a>
+        <a href="/privacy/"><span data-l="es">Privacidad</span><span data-l="en">Privacy</span></a>
+        <a href="/code-signing-policy/">Code signing policy</a>
+        <a href="/changelog/">Changelog</a>
+        <a href="https://github.com/havihub/HaviHub/blob/main/LICENSE"><span data-l="es">Licencia GPL-3.0</span><span data-l="en">GPL-3.0 license</span></a>
+        <a href="https://linktr.ee/havikunn"><span data-l="es">Hecho por Havikun</span><span data-l="en">Made by Havikun</span></a>
+      </div>
+      <div class="lang-menu"><button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list"><svg class="globe" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5Z"/></g></svg><span data-l="es">Idioma</span><span data-l="en">Language</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5"/></svg></button><ul class="lang-list" id="lang-list" aria-label="Idioma" data-en-aria-label="Language"><li><button type="button" data-lang-pick="es" lang="es" aria-pressed="true">Español</button></li><li><button type="button" data-lang-pick="en" lang="en" aria-pressed="false">English</button></li></ul></div>
+    </div>
+    <p class="legal">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
+    <p class="legal"><span data-l="es">Havi Hub no está afiliado ni respaldado por el proyecto Prism Launcher, CurseForge (Overwolf) ni Modrinth. Sus nombres se usan solo para indicar de dónde viene cada contenido. Minecraft es una marca de Mojang AB.</span><span data-l="en">Havi Hub is not affiliated with or endorsed by the Prism Launcher project, CurseForge (Overwolf) or Modrinth. Their names are only used to show where content comes from. Minecraft is a trademark of Mojang AB.</span></p>
+  </div>
+</footer>
+</body>
+</html>

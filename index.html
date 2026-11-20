@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="es" data-style="cf" data-en-doc-title="Havi Hub: a free launcher for Minecraft Java Edition">
+<head>
+<meta charset="utf-8">
+<script>
+// The language: the one picked with the button during this visit, or else the
+// first of the browser's languages that the site is written in (English if none).
+// The style (CurseForge or Modrinth): the one picked during this visit.
+(function () {
+  var l = null, s = null;
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.get("lang") === "es" || q.get("lang") === "en") sessionStorage.setItem("havihub-lang", q.get("lang"));
+    if (q.get("style") === "curseforge" || q.get("style") === "modrinth") sessionStorage.setItem("havihub-style", q.get("style") === "modrinth" ? "mr" : "cf");
+    l = sessionStorage.getItem("havihub-lang");
+    s = sessionStorage.getItem("havihub-style");
+    localStorage.removeItem("havihub-lang");
+  } catch (e) {}
+  document.documentElement.setAttribute("data-style", s === "mr" ? "mr" : "cf");
+  if (l !== "es" && l !== "en") {
+    var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+    l = "en";
+    for (var i = 0; i < list.length; i++) {
+      var c = String(list[i]).slice(0, 2).toLowerCase();
+      if (c === "es" || c === "en") { l = c; break; }
+    }
+  }
+  document.documentElement.lang = l;
+  document.documentElement.classList.add("js");
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Havi Hub: launcher libre para Minecraft Java Edition</title>
+<meta name="description" content="Launcher libre y de código abierto para Minecraft Java Edition, en Windows y Linux. Mods y modpacks de CurseForge y Modrinth en un solo lugar, sin anuncios ni telemetría." data-en-content="A free and open-source launcher for Minecraft Java Edition, for Windows and Linux. Mods and modpacks from CurseForge and Modrinth in one place, with no ads and no telemetry.">
+<meta name="theme-color" content="#0e0f12">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="canonical" href="https://havihub.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Havi Hub">
+<meta property="og:url" content="https://havihub.github.io/">
+<meta property="og:title" content="Havi Hub: launcher libre para Minecraft Java Edition">
+<meta property="og:description" content="Launcher libre y de código abierto para Minecraft Java Edition, en Windows y Linux. Mods y modpacks de CurseForge y Modrinth en un solo lugar, sin anuncios ni telemetría.">
+<meta property="og:image" content="https://havihub.github.io/assets/portada-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Havi Hub">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Havi Hub: launcher libre para Minecraft Java Edition">
+<meta name="twitter:description" content="Launcher libre y de código abierto para Minecraft Java Edition, en Windows y Linux. Mods y modpacks de CurseForge y Modrinth en un solo lugar, sin anuncios ni telemetría.">
+<meta name="twitter:image" content="https://havihub.github.io/assets/portada-1200x630.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Havi Hub",
+  "description": "Launcher libre y de código abierto para Minecraft Java Edition, en Windows y Linux. Mods y modpacks de CurseForge y Modrinth en un solo lugar, sin anuncios ni telemetría.",
+  "url": "https://havihub.github.io/",
+  "image": "https://havihub.github.io/assets/portada-1200x630.png",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Windows, Linux",
+  "license": "https://github.com/havihub/HaviHub/blob/main/LICENSE",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Havikun",
+    "alternateName": "havikun",
+    "url": "https://github.com/havikun"
+  }
+}
+</script>
+<link rel="preload" href="/assets/fonts/hubot-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true"><symbol id="h-paths" viewBox="-0.5 -0.5 33 33"><path style="fill:var(--hr)" d="M8.35 2.55L11.00 -0.05L11.00 4.25L8.35 6.85ZM29.35 2.55L32.00 -0.05L32.00 4.25L29.35 6.85ZM8.35 6.75L11.00 4.15L11.00 8.45L8.35 11.05ZM29.35 6.75L32.00 4.15L32.00 8.45L29.35 11.05ZM8.35 10.95L11.00 8.35L11.00 12.65L8.35 15.25ZM29.35 10.95L32.00 8.35L32.00 12.65L29.35 15.25ZM29.35 15.15L32.00 12.55L32.00 16.85L29.35 19.45ZM8.35 19.35L11.00 16.75L11.00 21.05L8.35 23.65ZM29.35 19.35L32.00 16.75L32.00 21.05L29.35 23.65ZM8.35 23.55L11.00 20.95L11.00 25.25L8.35 27.85ZM29.35 23.55L32.00 20.95L32.00 25.25L29.35 27.85ZM8.35 27.75L11.00 25.15L11.00 29.45L8.35 32.05ZM29.35 27.75L32.00 25.15L32.00 29.45L29.35 32.05Z"/><path style="fill:var(--ht)" d="M-0.05 2.65L2.55 0.00L6.85 0.00L4.25 2.65ZM4.15 2.65L6.75 0.00L11.05 0.00L8.45 2.65ZM20.95 2.65L23.55 0.00L27.85 0.00L25.25 2.65ZM25.15 2.65L27.75 0.00L32.05 0.00L29.45 2.65ZM8.35 15.25L10.95 12.60L15.25 12.60L12.65 15.25ZM12.55 15.25L15.15 12.60L19.45 12.60L16.85 15.25ZM16.75 15.25L19.35 12.60L23.65 12.60L21.05 15.25Z"/><path style="fill:var(--hf)" d="M-0.05 2.55L4.25 2.55L4.25 6.85L-0.05 6.85ZM4.15 2.55L8.45 2.55L8.45 6.85L4.15 6.85ZM20.95 2.55L25.25 2.55L25.25 6.85L20.95 6.85ZM25.15 2.55L29.45 2.55L29.45 6.85L25.15 6.85ZM-0.05 6.75L4.25 6.75L4.25 11.05L-0.05 11.05ZM4.15 6.75L8.45 6.75L8.45 11.05L4.15 11.05ZM20.95 6.75L25.25 6.75L25.25 11.05L20.95 11.05ZM25.15 6.75L29.45 6.75L29.45 11.05L25.15 11.05ZM-0.05 10.95L4.25 10.95L4.25 15.25L-0.05 15.25ZM4.15 10.95L8.45 10.95L8.45 15.25L4.15 15.25ZM20.95 10.95L25.25 10.95L25.25 15.25L20.95 15.25ZM25.15 10.95L29.45 10.95L29.45 15.25L25.15 15.25ZM-0.05 15.15L4.25 15.15L4.25 19.45L-0.05 19.45ZM4.15 15.15L8.45 15.15L8.45 19.45L4.15 19.45ZM8.35 15.15L12.65 15.15L12.65 19.45L8.35 19.45ZM12.55 15.15L16.85 15.15L16.85 19.45L12.55 19.45ZM16.75 15.15L21.05 15.15L21.05 19.45L16.75 19.45ZM20.95 15.15L25.25 15.15L25.25 19.45L20.95 19.45ZM25.15 15.15L29.45 15.15L29.45 19.45L25.15 19.45ZM-0.05 19.35L4.25 19.35L4.25 23.65L-0.05 23.65ZM4.15 19.35L8.45 19.35L8.45 23.65L4.15 23.65ZM20.95 19.35L25.25 19.35L25.25 23.65L20.95 23.65ZM25.15 19.35L29.45 19.35L29.45 23.65L25.15 23.65ZM-0.05 23.55L4.25 23.55L4.25 27.85L-0.05 27.85ZM4.15 23.55L8.45 23.55L8.45 27.85L4.15 27.85ZM20.95 23.55L25.25 23.55L25.25 27.85L20.95 27.85ZM25.15 23.55L29.45 23.55L29.45 27.85L25.15 27.85ZM-0.05 27.75L4.25 27.75L4.25 32.05L-0.05 32.05ZM4.15 27.75L8.45 27.75L8.45 32.05L4.15 32.05ZM20.95 27.75L25.25 27.75L25.25 32.05L20.95 32.05ZM25.15 27.75L29.45 27.75L29.45 32.05L25.15 32.05Z"/></symbol></svg>
+<div class="backdrop" aria-hidden="true"></div>
+<a class="skip" href="#main"><span data-l="es">Saltar al contenido</span><span data-l="en">Skip to content</span></a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><svg class="h-mark" viewBox="-0.5 -0.5 33 33" aria-hidden="true"><use href="#h-paths"/></svg>Havi Hub</a>
+    <nav aria-label="Secciones" data-en-aria-label="Sections">
+      <a href="#funciones"><span data-l="es">Funciones</span><span data-l="en">Features</span></a>
+      <a href="#capturas"><span data-l="es">Capturas</span><span data-l="en">Screenshots</span></a>
+      <a href="#descargar"><span data-l="es">Descargar</span><span data-l="en">Download</span></a>
+      <a href="#donaciones"><span data-l="es">Donaciones</span><span data-l="en">Donate</span></a>
+      <a href="#redes"><span data-l="es">Redes</span><span data-l="en">Social media</span></a>
+      <a class="nav-ext" href="/changelog/">Changelog<span class="ext" aria-hidden="true">↗</span></a>
+    </nav>
+    <div class="top-end">
+      <div class="seg" role="radiogroup" aria-label="Estilo" data-en-aria-label="Style"><button class="seg-opt" type="button" role="radio" data-style-pick="cf" aria-checked="true"><span class="seg-dot" aria-hidden="true"></span>CurseForge</button><button class="seg-opt" type="button" role="radio" data-style-pick="mr" aria-checked="false" tabindex="-1"><span class="seg-dot" aria-hidden="true"></span>Modrinth</button></div>
+      <a class="chip chip-gh" href="https://github.com/havihub/HaviHub" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.73.5.67 5.56.67 11.83c0 5.01 3.25 9.26 7.76 10.76.57.1.78-.25.78-.55v-1.93c-3.16.69-3.82-1.52-3.82-1.52-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.66 1.23 3.31.94.1-.73.4-1.23.72-1.52-2.52-.29-5.17-1.26-5.17-5.6 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.44.11-3 0 0 .95-.31 3.12 1.16a10.8 10.8 0 0 1 5.68 0c2.16-1.47 3.11-1.16 3.11-1.16.62 1.56.23 2.71.11 3 .73.79 1.17 1.8 1.17 3.04 0 4.35-2.66 5.31-5.19 5.59.41.35.77 1.04.77 2.1v3.11c0 .3.2.66.79.55a11.17 11.17 0 0 0 7.75-10.76C23.33 5.56 18.27.5 12 .5Z"/></svg><span>GitHub</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="wordmark"><svg class="h-mark" viewBox="-0.5 -0.5 33 33" aria-hidden="true"><use href="#h-paths"/></svg><span>Havi Hub</span></h1>
+      <p class="lede"><span data-l="es">Un launcher libre y de código abierto para Minecraft Java Edition.</span><span data-l="en">A free and open-source launcher for Minecraft Java Edition.</span></p>
+      <p class="sub"><span data-l="es">Tus perfiles, cuentas y mods en un solo lugar. Busca e instala mods y modpacks de CurseForge y Modrinth sin salir de la app, en Windows y Linux.</span><span data-l="en">Your profiles, accounts and mods in one place. Find and install mods and modpacks from CurseForge and Modrinth without leaving the app, on Windows and Linux.</span></p>
+      <div class="get" id="get">
+        <a class="btn btn-main" data-os="windows" data-asset="setup" aria-disabled="true" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg><span data-l="es">Descargar para Windows</span><span data-l="en">Download for Windows</span><small class="hint" data-size></small><span class="pill" data-soon hidden><span data-l="es">Muy pronto</span><span data-l="en">Coming soon</span></span></a>
+        <a class="btn btn-ghost" data-os="linux" data-asset="appimage" aria-disabled="true" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg><span data-l="es">Descargar para Linux</span><span data-l="en">Download for Linux</span><small class="hint" data-size></small><span class="pill" data-soon hidden><span data-l="es">Muy pronto</span><span data-l="en">Coming soon</span></span></a>
+        <a class="btn btn-ghost" id="get-gh" href="https://github.com/havihub/HaviHub" hidden><span data-l="es">Seguir el proyecto en GitHub</span><span data-l="en">Follow the project on GitHub</span></a>
+      </div>
+      <p class="get-note">
+        <span data-note="normal"><span data-l="es">Gratis y sin anuncios. Las demás versiones están en la sección <a href="#descargar">Descargar</a>.</span><span data-l="en">Free, with no ads. The other versions are in the <a href="#descargar">Download</a> section.</span></span>
+        <span data-note="mac" hidden><span data-l="es">Havi Hub está disponible para Windows y Linux. Todas las versiones están en la sección <a href="#descargar">Descargar</a>.</span><span data-l="en">Havi Hub is available for Windows and Linux. Every version is in the <a href="#descargar">Download</a> section.</span></span>
+        <span data-note="mobile" hidden><span data-l="es">Havi Hub es para computadores con Windows o Linux. Abre esta página en tu computador para descargarlo.</span><span data-l="en">Havi Hub runs on Windows and Linux computers. Open this page on your computer to download it.</span></span>
+        <span data-note="none" hidden><span data-l="es">La primera versión pública está por salir.</span><span data-l="en">The first public version is almost ready.</span></span>
+      </p>
+    </div>
+  </section>
+
+  <section class="block" id="funciones">
+    <div class="wrap">
+      <h2><span data-l="es">Dos diseños, las mismas funciones</span><span data-l="en">Two layouts, the same features</span></h2>
+      <p class="intro"><span data-l="es">Havi Hub puede verse como la app de CurseForge o como la de Modrinth. Los dos diseños tienen todas las funciones y puedes cambiar de uno a otro cuando quieras.</span><span data-l="en">Havi Hub can look like the CurseForge app or like the Modrinth app. Both layouts have every feature, and you can switch between them whenever you like.</span></p>
+      <div class="compare" id="compare">
+        <div class="compare-glow" aria-hidden="true"><i class="g-cf"></i><i class="g-mr"></i></div>
+        <div class="compare-frame">
+          <div class="compare-layer">
+            <img data-shot="home" data-shot-style="cf" src="/assets/shots/cf/es/home.webp" width="1600" height="900" draggable="false" alt="La página de inicio de Havi Hub, estilo CurseForge" data-en-alt="The Havi Hub home page, CurseForge style">
+            <span class="compare-tag" aria-hidden="true"><i class="dot dot-cf"></i>CurseForge</span>
+          </div>
+          <div class="compare-layer compare-top">
+            <img data-shot="home" data-shot-style="mr" src="/assets/shots/mr/es/home.webp" width="1600" height="900" draggable="false" alt="La página de inicio de Havi Hub, estilo Modrinth" data-en-alt="The Havi Hub home page, Modrinth style">
+            <span class="compare-tag" aria-hidden="true"><i class="dot dot-mr"></i>Modrinth</span>
+          </div>
+          <div class="compare-handle" role="slider" tabindex="0" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="CurseForge 50%, Modrinth 50%" aria-label="Comparar los estilos CurseForge y Modrinth" data-en-aria-label="Compare the CurseForge and Modrinth styles"><span class="compare-knob"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+        </div>
+        <div class="compare-caps">
+          <p data-side="cf"><strong><span data-l="es">Estilo CurseForge</span><span data-l="en">CurseForge style</span></strong> <span data-l="es">Pestañas arriba (Mis modpacks, Descubrir, Explorar…) y la barra de juegos a la izquierda.</span><span data-l="en">Tabs along the top (My Modpacks, Discover, Browse…) and the games bar on the left.</span></p>
+          <p data-side="mr"><strong><span data-l="es">Estilo Modrinth</span><span data-l="en">Modrinth style</span></strong> <span data-l="es">Una barra de íconos con tus perfiles recientes, la página en un panel redondeado y tu cuenta en una columna lateral.</span><span data-l="en">An icon bar with your recent profiles, the page in a rounded panel and your account in a side column.</span></p>
+        </div>
+      </div>
+
+      <div class="bento">
+        <article class="card card-wide c1">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></g></svg></span>
+          <p class="card-title"><span data-l="es">CurseForge y Modrinth a la vez</span><span data-l="en">CurseForge and Modrinth together</span></p>
+          <p><span data-l="es">Mods, modpacks, resource packs, shaders, data packs y mundos de los dos sitios en una sola búsqueda. Havi Hub se encarga de las dependencias y las actualizaciones.</span><span data-l="en">Mods, modpacks, resource packs, shaders, data packs and worlds from both sites in a single search. Havi Hub takes care of dependencies and updates.</span></p>
+          <div class="deco deco-search" aria-hidden="true">
+            <div class="q"><svg class="q-icon" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></g></svg><span class="q-caret"></span><span class="q-srcs"><span class="src"><i class="dot dot-cf"></i>CurseForge<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5.5 12.5 4 4 9-9.5"/></svg></span><span class="src"><i class="dot dot-mr"></i>Modrinth<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5.5 12.5 4 4 9-9.5"/></svg></span></span></div>
+            <div class="q-types"><span class="on">Mods</span><span>Modpacks</span><span>Resource packs</span><span>Shaders</span><span>Data packs</span><span><span data-l="es">Mundos</span><span data-l="en">Worlds</span></span></div>
+          </div>
+        </article>
+        <article class="card card-wide c2">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V6.5A2.5 2.5 0 0 1 5.5 4h3.3l2 2.2h7.7A2.5 2.5 0 0 1 21 8.7v8.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5V16"/><path d="M2.5 12h9.5"/><path d="m9 9 3 3-3 3"/></g></svg></span>
+          <p class="card-title"><span data-l="es">Trae tus partidas sin perder nada</span><span data-l="en">Bring your profiles with you</span></p>
+          <p><span data-l="es">Importa tus perfiles de CurseForge, Modrinth o Prism Launcher con sus mundos, mods y controles. También puedes mantenerlos sincronizados y jugar desde cualquiera de los dos launchers.</span><span data-l="en">Import your profiles from CurseForge, Modrinth or Prism Launcher with their worlds, mods and key bindings. You can also keep them in sync and play from either launcher.</span></p>
+          <div class="deco migrate" role="img" aria-label="Perfiles, mundos y controles pasan de CurseForge, Modrinth o Prism Launcher a Havi Hub" data-en-aria-label="Profiles, worlds and keys move from CurseForge, Modrinth or Prism Launcher to Havi Hub">
+            <div class="mg-from" aria-hidden="true">
+              <span class="badge"><i class="dot dot-cf"></i>CurseForge</span>
+              <span class="badge"><i class="dot dot-mr"></i>Modrinth</span>
+              <span class="badge"><i class="dot dot-pl"></i>Prism Launcher</span>
+            </div>
+            <div class="mg-curves" aria-hidden="true">
+              <svg class="mg-wires" viewBox="0 0 200 132" preserveAspectRatio="none"><defs><linearGradient id="mg-wire" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0.16"/><stop offset="1" style="stop-color:var(--accent)" stop-opacity="0.9"/></linearGradient></defs><path d="M0 22C100 22 100 66 200 66"/><path d="M0 66H200"/><path d="M0 110C100 110 100 66 200 66"/></svg>
+              <span class="mg-pkt r0 is-rest" style="--slot:0"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M9 9v11"/></g></svg><span><span data-l="es">Perfiles</span><span data-l="en">Profiles</span></span></span>
+              <span class="mg-pkt r0" style="--slot:1"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.4 5.2 3.4 8.5s-1 6.1-3.4 8.5"/></g></svg><span><span data-l="es">Mundos</span><span data-l="en">Worlds</span></span></span>
+              <span class="mg-pkt r0" style="--slot:2"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M7 10h.01M11 10h.01M15 10h.01M8 14h8"/></g></svg><span><span data-l="es">Controles</span><span data-l="en">Keys</span></span></span>
+              <span class="mg-pkt r1" style="--slot:2"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M9 9v11"/></g></svg><span><span data-l="es">Perfiles</span><span data-l="en">Profiles</span></span></span>
+              <span class="mg-pkt r1 is-rest" style="--slot:0"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.4 5.2 3.4 8.5s-1 6.1-3.4 8.5"/></g></svg><span><span data-l="es">Mundos</span><span data-l="en">Worlds</span></span></span>
+              <span class="mg-pkt r1" style="--slot:1"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M7 10h.01M11 10h.01M15 10h.01M8 14h8"/></g></svg><span><span data-l="es">Controles</span><span data-l="en">Keys</span></span></span>
+              <span class="mg-pkt r2" style="--slot:1"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M9 9v11"/></g></svg><span><span data-l="es">Perfiles</span><span data-l="en">Profiles</span></span></span>
+              <span class="mg-pkt r2" style="--slot:2"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.4 5.2 3.4 8.5s-1 6.1-3.4 8.5"/></g></svg><span><span data-l="es">Mundos</span><span data-l="en">Worlds</span></span></span>
+              <span class="mg-pkt r2 is-rest" style="--slot:0"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M7 10h.01M11 10h.01M15 10h.01M8 14h8"/></g></svg><span><span data-l="es">Controles</span><span data-l="en">Keys</span></span></span>
+            </div>
+            <span class="badge badge-hub" aria-hidden="true"><svg class="h-mark" viewBox="-0.5 -0.5 33 33" aria-hidden="true"><use href="#h-paths"/></svg>Havi Hub</span>
+          </div>
+        </article>
+        <article class="card c3">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c.8-3.7 3.6-5.6 7-5.6s6.2 1.9 7 5.6"/></g></svg></span>
+          <p class="card-title"><span data-l="es">Cuenta de Microsoft</span><span data-l="en">Microsoft account</span></p>
+          <p><span data-l="es">Inicia sesión con tu cuenta de Microsoft. Una vez que entras con una cuenta que tiene el juego, puedes agregar cuentas offline para LAN y servidores en modo offline.</span><span data-l="en">Sign in with your Microsoft account. Once you've signed in with an account that owns the game, you can add offline accounts for LAN and offline-mode servers.</span></p>
+        </article>
+        <article class="card c4">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h8.5M17.5 7H20M4 17h2.5M11.5 17H20"/><circle cx="15" cy="7" r="2.5"/><circle cx="9" cy="17" r="2.5"/></g></svg></span>
+          <p class="card-title"><span data-l="es">Ajustes por perfil</span><span data-l="en">Settings for each profile</span></p>
+          <p><span data-l="es">Java, memoria, variables de entorno y comandos de inicio para cada perfil, además de opciones del juego y teclas predeterminadas para los perfiles nuevos.</span><span data-l="en">Java, memory, environment variables and launch commands for each profile, plus default game options and key bindings for new profiles.</span></p>
+        </article>
+        <article class="card c5">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 4.5 7.4v9.2l7.5 4.2 7.5-4.2V7.4L12 3.2Z"/><path d="m4.5 7.4 7.5 4.3 7.5-4.3M12 11.7v9.1"/></g></svg></span>
+          <p class="card-title"><span data-l="es">Skins, servidores y capturas</span><span data-l="en">Skins, servers and screenshots</span></p>
+          <p><span data-l="es">Un visor de skins en 3D, un buscador de servidores y una galería con las capturas de todos tus perfiles.</span><span data-l="en">A 3D skin viewer, a server browser and a gallery with the screenshots from all your profiles.</span></p>
+        </article>
+        <article class="card c6">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.3 5.2 5.8v5.6c0 4.3 2.8 7.6 6.8 9.1 4-1.5 6.8-4.8 6.8-9.1V5.8L12 3.3Z"/><path d="m9.1 12.1 2.1 2.1 3.9-4.1"/></g></svg></span>
+          <p class="card-title"><span data-l="es">Sin anuncios ni telemetría</span><span data-l="en">No ads, no telemetry</span></p>
+          <p><span data-l="es">Havi Hub no tiene servidores propios: tus cuentas, perfiles y ajustes se quedan en tu computador. Los detalles están en <a href="/privacy/">Privacidad</a>.</span><span data-l="en">Havi Hub has no servers of its own: your accounts, profiles and settings stay on your computer. The details are on the <a href="/privacy/">Privacy</a> page.</span></p>
+        </article>
+        <article class="card c7">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="10" rx="1.8"/><path d="M8 7V4.5M12 7V4.5M16 7V4.5M8 19.5V17M12 19.5V17M16 19.5V17M8.5 10.5v3M11.5 10.5v3"/></g></svg></span>
+          <p class="card-title"><span data-l="es">Bajo consumo de RAM</span><span data-l="en">Low RAM usage</span></p>
+          <p><span data-l="es">Havi Hub está optimizado para usar la menor cantidad de memoria posible. Al iniciar el juego se oculta en segundo plano y libera sus recursos para no afectar el rendimiento.</span><span data-l="en">Havi Hub is optimized to use as little memory as possible. Once the game starts, it hides in the background and frees up resources so performance stays unaffected.</span></p>
+        </article>
+        <article class="card c8">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></g></svg></span>
+          <p class="card-title"><span data-l="es">Java y diagnóstico automático</span><span data-l="en">Automatic Java and error diagnostics</span></p>
+          <p><span data-l="es">Havi Hub detecta e instala la versión de Java que requiere cada perfil. Si el juego se cierra por un error, te muestra la causa exacta para que puedas solucionarlo.</span><span data-l="en">Havi Hub detects and installs the exact Java version each profile requires. If the game crashes, it shows the exact cause so you can fix it.</span></p>
+          <div class="deco easy">
+            <div class="ez-row">
+              <span class="ez-node"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 4.5 7.7v8.6l7.5 4.2 7.5-4.2V7.7L12 3.5Z"/><path d="M4.5 7.7 12 12l7.5-4.3M12 12v8.5"/></g></svg><span><span data-l="es">Seleccionas una versión</span><span data-l="en">Select a version</span></span></span>
+              <span class="ez-arrow" aria-hidden="true"><i></i></span>
+              <span class="ez-node ez-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><span data-l="es">Java se instala automáticamente</span><span data-l="en">Java installs automatically</span></span></span>
+            </div>
+            <div class="ez-row">
+              <span class="ez-node"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="m9.5 10 5 5M14.5 10l-5 5"/></g></svg><span><span data-l="es">Si ocurre un cierre</span><span data-l="en">If the game crashes</span></span></span>
+              <span class="ez-arrow" aria-hidden="true"><i></i></span>
+              <span class="ez-node ez-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></g></svg><span><span data-l="es">Causa detectada: Falta Fabric API</span><span data-l="en">Cause detected: Missing Fabric API</span></span></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="capturas">
+    <div class="wrap">
+      <h2><span data-l="es">Capturas</span><span data-l="en">Screenshots</span></h2>
+      <div class="tabs" role="tablist" aria-label="Capturas" data-en-aria-label="Screenshots">
+        <span class="tab-ink" aria-hidden="true"></span>
+        <button class="tab" type="button" role="tab" id="tab-new-instance" aria-controls="pane-new-instance" aria-selected="true"><span data-l="es">Crear instancia</span><span data-l="en">Create instance</span></button>
+        <button class="tab" type="button" role="tab" id="tab-browse" aria-controls="pane-browse" aria-selected="false" tabindex="-1"><span data-l="es">Explorar</span><span data-l="en">Browse</span></button>
+        <button class="tab" type="button" role="tab" id="tab-servers" aria-controls="pane-servers" aria-selected="false" tabindex="-1"><span data-l="es">Servidores</span><span data-l="en">Servers</span></button>
+        <button class="tab" type="button" role="tab" id="tab-gallery" aria-controls="pane-gallery" aria-selected="false" tabindex="-1"><span data-l="es">Capturas</span><span data-l="en">Screenshots</span></button>
+        <button class="tab" type="button" role="tab" id="tab-skins" aria-controls="pane-skins" aria-selected="false" tabindex="-1"><span data-l="es">Skins 3D</span><span data-l="en">3D skins</span></button>
+        <button class="tab" type="button" role="tab" id="tab-import" aria-controls="pane-import" aria-selected="false" tabindex="-1"><span data-l="es">Importar perfiles</span><span data-l="en">Import profiles</span></button>
+        <button class="tab" type="button" role="tab" id="tab-seasons" aria-controls="pane-seasons" aria-selected="false" tabindex="-1"><span data-l="es">Temas de temporada</span><span data-l="en">Seasonal themes</span></button>
+      </div>
+      <div class="panes">
+        <div class="pane is-on" role="tabpanel" id="pane-new-instance" aria-labelledby="tab-new-instance">
+          <figure>
+            <a class="zoomable frame" href="/assets/shots/cf/es/new-instance.webp" data-lb="new-instance"><img data-shot="new-instance" src="/assets/shots/cf/es/new-instance.webp" width="1600" height="900" loading="lazy" alt="La ventana para crear una instancia" data-en-alt="The window for creating an instance"></a>
+            <figcaption><strong><span data-l="es">Crear una instancia.</span><span data-l="en">Creating an instance.</span></strong> <span data-l="es">Elige la versión de Minecraft y el cargador de mods: <span class="mono">Fabric</span>, <span class="mono">Quilt</span>, <span class="mono">Forge</span> o <span class="mono">NeoForge</span>.</span><span data-l="en">Choose the Minecraft version and the mod loader: <span class="mono">Fabric</span>, <span class="mono">Quilt</span>, <span class="mono">Forge</span> or <span class="mono">NeoForge</span>.</span></figcaption>
+          </figure>
+        </div>
+        <div class="pane" role="tabpanel" id="pane-browse" aria-labelledby="tab-browse">
+          <figure>
+            <a class="zoomable frame" href="/assets/shots/cf/es/browse.webp" data-lb="browse"><img data-shot="browse" src="/assets/shots/cf/es/browse.webp" width="1600" height="900" loading="lazy" alt="Una lista de proyectos con filtros" data-en-alt="A list of projects with filters"></a>
+            <figcaption><strong><span data-l="es">Explorar.</span><span data-l="en">Browse.</span></strong> <span data-l="es">Mods y modpacks filtrados por versión del juego, cargador y categoría.</span><span data-l="en">Mods and modpacks filtered by game version, mod loader and category.</span></figcaption>
+          </figure>
+        </div>
+        <div class="pane" role="tabpanel" id="pane-servers" aria-labelledby="tab-servers">
+          <figure>
+            <a class="zoomable frame" href="/assets/shots/cf/es/servers.webp" data-lb="servers"><img data-shot="servers" src="/assets/shots/cf/es/servers.webp" width="1600" height="900" loading="lazy" alt="El buscador de servidores" data-en-alt="The server browser"></a>
+            <figcaption><strong><span data-l="es">Servidores.</span><span data-l="en">Servers.</span></strong> <span data-l="es">Los servidores más conocidos y la lista de Modrinth en un solo buscador, con su ping y un botón para entrar a jugar.</span><span data-l="en">The best-known servers and Modrinth's list in one browser, with each server's ping and a button to join and play.</span></figcaption>
+          </figure>
+        </div>
+        <div class="pane" role="tabpanel" id="pane-gallery" aria-labelledby="tab-gallery">
+          <figure>
+            <a class="zoomable frame" href="/assets/shots/cf/es/gallery.webp" data-lb="gallery"><img data-shot="gallery" src="/assets/shots/cf/es/gallery.webp" width="1600" height="900" loading="lazy" alt="La página de capturas de Havi Hub" data-en-alt="The Havi Hub screenshots page"></a>
+            <figcaption><strong><span data-l="es">Capturas.</span><span data-l="en">Screenshots.</span></strong> <span data-l="es">Las capturas de todos tus perfiles, ordenadas por día y con filtros por perfil, grupo, versión y fecha.</span><span data-l="en">The screenshots from all your profiles, sorted by day, with filters for profile, group, version and date.</span></figcaption>
+          </figure>
+        </div>
+        <div class="pane" role="tabpanel" id="pane-skins" aria-labelledby="tab-skins">
+          <figure>
+            <a class="zoomable frame" href="/assets/shots/cf/es/skins.webp" data-lb="skins"><img data-shot="skins" src="/assets/shots/cf/es/skins.webp" width="1600" height="900" loading="lazy" alt="Una skin en el visor 3D de Havi Hub" data-en-alt="A skin in the Havi Hub 3D viewer"></a>
+            <figcaption><strong><span data-l="es">Skins.</span><span data-l="en">Skins.</span></strong> <span data-l="es">Tu skin en un mundo de Minecraft, con las animaciones del juego.</span><span data-l="en">Your skin in a Minecraft world, with the game's own animations.</span></figcaption>
+          </figure>
+        </div>
+        <div class="pane" role="tabpanel" id="pane-import" aria-labelledby="tab-import">
+          <figure>
+            <a class="zoomable frame" href="/assets/shots/cf/es/import.webp" data-lb="import"><img data-shot="import" src="/assets/shots/cf/es/import.webp" width="1600" height="900" loading="lazy" alt="La ventana para importar perfiles desde otro launcher" data-en-alt="The window for importing profiles from another launcher"></a>
+            <figcaption><strong><span data-l="es">Importar perfiles.</span><span data-l="en">Importing profiles.</span></strong> <span data-l="es">Trae tus perfiles desde CurseForge, Modrinth y Prism Launcher, de uno o de los tres a la vez.</span><span data-l="en">Bring your profiles over from CurseForge, Modrinth and Prism Launcher, from one of them or all three at once.</span></figcaption>
+          </figure>
+        </div>
+        <div class="pane" role="tabpanel" id="pane-seasons" aria-labelledby="tab-seasons">
+          <div class="themes" role="radiogroup" aria-label="Tema" data-en-aria-label="Theme"><button class="theme-pick" type="button" role="radio" data-theme="halloween" aria-checked="true"><span class="theme-dot" aria-hidden="true"></span><span data-l="es">Halloween</span><span data-l="en">Halloween</span></button><button class="theme-pick" type="button" role="radio" data-theme="christmas" aria-checked="false" tabindex="-1"><span class="theme-dot" aria-hidden="true"></span><span data-l="es">Navidad</span><span data-l="en">Christmas</span></button><button class="theme-pick" type="button" role="radio" data-theme="newyear" aria-checked="false" tabindex="-1"><span class="theme-dot" aria-hidden="true"></span><span data-l="es">Año Nuevo</span><span data-l="en">New Year</span></button></div>
+          <div class="theme-shots">
+            <figure class="theme-shot is-on" data-theme-shot="halloween">
+              <a class="zoomable frame" href="/assets/shots/cf/es/season-halloween.webp" data-lb="season-halloween"><img data-shot="season-halloween" src="/assets/shots/cf/es/season-halloween.webp" width="1600" height="900" loading="lazy" alt="Havi Hub con el tema de Halloween" data-en-alt="Havi Hub with the Halloween theme"></a>
+              <figcaption><strong><span data-l="es">Halloween.</span><span data-l="en">Halloween.</span></strong> <span data-l="es">Del 25 de octubre al 1 de noviembre: calabazas y murciélagos de Minecraft, la luna del juego y sustos que se pueden desactivar.</span><span data-l="en">From October 25 to November 1: Minecraft pumpkins and bats, the game's moon and scares that can be turned off.</span></figcaption>
+            </figure>
+            <figure class="theme-shot" data-theme-shot="christmas">
+              <a class="zoomable frame" href="/assets/shots/cf/es/season-christmas.webp" data-lb="season-christmas"><img data-shot="season-christmas" src="/assets/shots/cf/es/season-christmas.webp" width="1600" height="900" loading="lazy" alt="Havi Hub con el tema de Navidad" data-en-alt="Havi Hub with the Christmas theme"></a>
+              <figcaption><strong><span data-l="es">Navidad.</span><span data-l="en">Christmas.</span></strong> <span data-l="es">Del 19 al 26 de diciembre: la nevada de Minecraft, luces y un trineo con renos.</span><span data-l="en">From December 19 to 26: Minecraft's snowfall, lights and a reindeer sleigh.</span></figcaption>
+            </figure>
+            <figure class="theme-shot" data-theme-shot="newyear">
+              <a class="zoomable frame" href="/assets/shots/cf/es/season-newyear.webp" data-lb="season-newyear"><img data-shot="season-newyear" src="/assets/shots/cf/es/season-newyear.webp" width="1600" height="900" loading="lazy" alt="Havi Hub con el tema de Año Nuevo" data-en-alt="Havi Hub with the New Year theme"></a>
+              <figcaption><strong><span data-l="es">Año Nuevo.</span><span data-l="en">New Year.</span></strong> <span data-l="es">Del 27 de diciembre al 2 de enero: una cuenta regresiva y los fuegos artificiales del juego a las 00:00.</span><span data-l="en">From December 27 to January 2: a countdown and the game's fireworks at midnight.</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap how">
+      <h2><span data-l="es">Cómo funciona</span><span data-l="en">How it works</span></h2>
+      <div class="text">
+        <p><span data-l="es">Havi Hub usa <a href="https://prismlauncher.org">Prism Launcher</a> como motor de juego. La primera vez que lo abres descarga la versión portable oficial desde GitHub, revisa que coincida con su suma de verificación y desde ahí la mantiene actualizada.</span><span data-l="en">Havi Hub uses <a href="https://prismlauncher.org">Prism Launcher</a> as its game engine. The first time you open it, it downloads the official portable build from GitHub, checks it against its checksum and keeps it up to date from then on.</span></p>
+        <p><span data-l="es">Las imágenes y los sonidos del juego, como el logo de Minecraft o los bloques, se leen de los archivos de Minecraft de tu computador. Si todavía no tienes el juego, Havi Hub descarga una vez su archivo desde los servidores de Mojang. <strong>Ningún archivo de Mojang viene dentro del instalador.</strong></span><span data-l="en">The game's images and sounds, such as the Minecraft logo or the blocks, are read from the Minecraft files on your computer. If you don't have the game yet, Havi Hub downloads its file once from Mojang's servers. <strong>No Mojang files are included in the installer.</strong></span></p>
+        <p><span data-l="es">El código completo está en <a href="https://github.com/havihub/HaviHub">GitHub</a>, bajo la licencia <span class="mono">GPL-3.0</span>.</span><span data-l="en">The full source code is on <a href="https://github.com/havihub/HaviHub">GitHub</a>, under the <span class="mono">GPL-3.0</span> license.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="descargar">
+    <div class="wrap">
+      <h2><span data-l="es">Descargar</span><span data-l="en">Download</span></h2>
+      <p class="rel-line">
+        <span data-rel="version" hidden><span data-l="es">Versión <strong class="mono" data-ver></strong>, publicada el <span data-date="es"></span>.</span><span data-l="en">Version <strong class="mono" data-ver></strong>, released on <span data-date="en"></span>.</span></span>
+        <span data-rel="none" hidden><span data-l="es">La primera versión pública está por salir. Mientras tanto puedes seguir el proyecto en <a href="https://github.com/havihub/HaviHub">GitHub</a>.</span><span data-l="en">The first public version is almost ready. In the meantime, you can follow the project on <a href="https://github.com/havihub/HaviHub">GitHub</a>.</span></span>
+      </p>
+      <div class="dl-grid">
+        <article class="os-card" data-os="windows">
+          <div class="os-head">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12.5" rx="2.2"/><path d="M8.5 20h7M12 16.5V20"/></g></svg></span>
+            <div class="os-name"><h3>Windows</h3><p class="os-req"><span data-l="es">10 y 11, 64 bits</span><span data-l="en">10 and 11, 64-bit</span></p></div>
+            <span class="rec" data-rec="windows"><span data-l="es">Recomendado</span><span data-l="en">Recommended</span></span>
+          </div>
+          <a class="dl os-main off" data-asset="setup" aria-disabled="true" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg><span class="dl-name"><span data-l="es">Instalador</span><span data-l="en">Installer</span></span><span class="dl-meta"><span class="mono">.exe</span><span class="size"></span></span></a>
+          <ul class="alts">
+            <li><a class="dl alt off" data-asset="portable" aria-disabled="true" tabindex="-1"><span class="dl-name"><span data-l="es">Portable: se abre sin instalar</span><span data-l="en">Portable: runs without installing</span></span><span class="dl-meta"><span class="mono">.exe</span><span class="size"></span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></a></li>
+            <li><a class="dl alt off" data-asset="zip" aria-disabled="true" tabindex="-1"><span class="dl-name"><span data-l="es">Carpeta comprimida</span><span data-l="en">Compressed folder</span></span><span class="dl-meta"><span class="mono">.zip</span><span class="size"></span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></a></li>
+          </ul>
+        </article>
+        <article class="os-card" data-os="linux">
+          <div class="os-head">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.2"/><path d="m7.5 9.5 2.8 2.5-2.8 2.5M13 15h3.5"/></g></svg></span>
+            <div class="os-name"><h3>Linux</h3><p class="os-req"><span data-l="es"><span class="mono">x86-64</span>, cualquier distribución</span><span data-l="en"><span class="mono">x86-64</span>, any distribution</span></p></div>
+            <span class="rec" data-rec="linux" hidden><span data-l="es">Recomendado</span><span data-l="en">Recommended</span></span>
+          </div>
+          <a class="dl os-main off" data-asset="appimage" aria-disabled="true" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg><span class="dl-name">AppImage</span><span class="dl-meta"><span class="mono">.AppImage</span><span class="size"></span></span></a>
+          <ul class="alts">
+            <li><a class="dl alt off" data-asset="deb" aria-disabled="true" tabindex="-1"><span class="dl-name"><span data-l="es">Paquete <span class="mono">.deb</span></span><span data-l="en"><span class="mono">.deb</span> package</span><span class="dl-note"><span data-l="es">Debian, Ubuntu y derivadas</span><span data-l="en">Debian, Ubuntu and derivatives</span></span></span><span class="dl-meta"><span class="size"></span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></a></li>
+          </ul>
+        </article>
+      </div>
+      <ul class="notes">
+        <li><span data-l="es"><strong>Las novedades</strong> de cada versión están en el <a href="/changelog/">Changelog</a>.</span><span data-l="en"><strong>What's new</strong> in each release is in the <a href="/changelog/">Changelog</a>.</span></li>
+        <li><span data-l="es"><strong>Para jugar</strong> necesitas una cuenta de Microsoft que tenga Minecraft Java Edition.</span><span data-l="en"><strong>To play,</strong> you need a Microsoft account that owns Minecraft Java Edition.</span></li>
+        <li><span data-l="es"><strong>En Windows</strong> los instaladores todavía no tienen firma digital, así que la primera vez puede aparecer un aviso de SmartScreen: haz clic en «Más información» y luego en «Ejecutar de todas formas». Más detalles en la <a href="/code-signing-policy/">Code signing policy</a>.</span><span data-l="en"><strong>On Windows,</strong> the installers are not digitally signed yet, so SmartScreen may show a warning the first time you run them: click “More info” and then “Run anyway”. More details in the <a href="/code-signing-policy/">Code signing policy</a>.</span></li>
+        <li><span data-l="es"><strong>Cada versión</strong> publica la suma <span class="mono">SHA-256</span> de sus archivos en <a href="https://github.com/havihub/HaviHub/releases">GitHub</a>, para que puedas comprobar lo que descargaste.</span><span data-l="en"><strong>Every release</strong> lists the <span class="mono">SHA-256</span> checksum of its files on <a href="https://github.com/havihub/HaviHub/releases">GitHub</a>, so you can check what you downloaded.</span></li>
+      </ul>
+      <div class="faq">
+        <h3 class="faq-title"><span data-l="es">Preguntas frecuentes</span><span data-l="en">Frequently asked questions</span></h3>
+        <details class="faq-item">
+          <summary><span data-l="es">¿Es seguro? ¿Qué pasa con mis datos?</span><span data-l="en">Is it safe? What about my data?</span><svg class="faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5"/></svg></summary>
+          <div class="faq-a"><p><span data-l="es">Havi Hub es software libre bajo <span class="mono">GPL-3.0</span>: todo el código se puede revisar en <a href="https://github.com/havihub/HaviHub">GitHub</a>. No tiene servidores propios ni envía telemetría; tus cuentas, perfiles y ajustes se quedan en tu computador. Los detalles están en <a href="/privacy/">Privacidad</a>.</span><span data-l="en">Havi Hub is free software under <span class="mono">GPL-3.0</span>: all of its code can be reviewed on <a href="https://github.com/havihub/HaviHub">GitHub</a>. It has no servers of its own and sends no telemetry; your accounts, profiles and settings stay on your computer. The details are in <a href="/privacy/">Privacy</a>.</span></p></div>
+        </details>
+        <details class="faq-item">
+          <summary><span data-l="es">¿Qué loaders soporta? ¿Tengo que instalar Java?</span><span data-l="en">Which loaders does it support? Do I need to install Java?</span><svg class="faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5"/></svg></summary>
+          <div class="faq-a"><p><span data-l="es">Fabric, Quilt, Forge y NeoForge, además de Vanilla. No necesitas instalar Java: Havi Hub detecta la versión que pide cada perfil (8, 17 o 21) y, si falta, descarga Eclipse Temurin oficial por ti.</span><span data-l="en">Fabric, Quilt, Forge and NeoForge, plus Vanilla. You don't need to install Java: Havi Hub finds the version each profile needs (8, 17 or 21) and, if it's missing, downloads the official Eclipse Temurin for you.</span></p></div>
+        </details>
+        <details class="faq-item">
+          <summary><span data-l="es">¿Puedo traer mis perfiles y mundos de otro launcher?</span><span data-l="en">Can I bring my profiles and worlds from another launcher?</span><svg class="faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5"/></svg></summary>
+          <div class="faq-a"><p><span data-l="es">Sí. Importa tus perfiles de CurseForge, Modrinth o Prism Launcher con sus mods, mundos, ajustes y teclas, o mantenlos sincronizados para jugar desde ambos launchers.</span><span data-l="en">Yes. Import your profiles from CurseForge, Modrinth or Prism Launcher with their mods, worlds, settings and key bindings, or keep them in sync and play from either launcher.</span></p></div>
+        </details>
+        <details class="faq-item">
+          <summary><span data-l="es">¿Necesito una cuenta de Microsoft? ¿Puedo jugar offline en LAN?</span><span data-l="en">Do I need a Microsoft account? Can I play offline on LAN?</span><svg class="faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5"/></svg></summary>
+          <div class="faq-a"><p><span data-l="es">Para jugar necesitas una cuenta de Microsoft que tenga Minecraft Java Edition. Después de iniciar sesión con ella puedes agregar cuentas offline para jugar en LAN o en servidores en modo offline.</span><span data-l="en">To play you need a Microsoft account that owns Minecraft Java Edition. After signing in with it, you can add offline accounts to play on LAN or on servers in offline mode.</span></p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="donaciones">
+    <span id="propinas"></span>
+    <div class="wrap give-grid">
+      <div>
+        <h2><span data-l="es">Donaciones</span><span data-l="en">Donate</span></h2>
+        <p class="intro"><span data-l="es">Havi Hub es gratis y no tiene anuncios. Lo hago en mi tiempo libre, así que si te sirve y quieres apoyarlo, puedes hacer una donación en Ko-fi. Cualquier monto me ayuda a seguir mejorándolo.</span><span data-l="en">Havi Hub is free and has no ads. I work on it in my spare time, so if you find it useful and want to support it, you can make a donation on Ko-fi. Any amount helps me keep improving it.</span></p>
+        <p class="give-other"><span data-l="es">Si no puedes donar, también ayuda mucho que reportes los errores que encuentres en <a href="https://github.com/havihub/HaviHub/issues">GitHub</a> o que se lo recomiendes a tus amigos.</span><span data-l="en">If you can't donate, reporting the bugs you find on <a href="https://github.com/havihub/HaviHub/issues">GitHub</a> or telling your friends about Havi Hub helps a lot too.</span></p>
+        <svg class="mug" viewBox="-0.5 -0.5 33.0 41.4" aria-hidden="true"><path class="ms" d="M16.75 36.15L19.40 33.55L19.40 37.85L16.75 40.45ZM20.95 15.15L23.60 12.55L23.60 16.85L20.95 19.45ZM20.95 23.55L23.60 20.95L23.60 25.25L20.95 27.85ZM20.95 31.95L23.60 29.35L23.60 33.65L20.95 36.25Z"/><path class="msd" d="M29.35 19.35L32.00 16.75L32.00 21.05L29.35 23.65ZM29.35 23.55L32.00 20.95L32.00 25.25L29.35 27.85ZM29.35 27.75L32.00 25.15L32.00 29.45L29.35 32.05Z"/><path class="mt" d="M-0.05 15.25L2.55 12.60L6.85 12.60L4.25 15.25ZM16.75 15.25L19.35 12.60L23.65 12.60L21.05 15.25Z"/><path fill="#4a2a1a" d="M4.15 15.25L6.75 12.60L11.05 12.60L8.45 15.25ZM8.35 15.25L10.95 12.60L15.25 12.60L12.65 15.25ZM12.55 15.25L15.15 12.60L19.45 12.60L16.85 15.25Z"/><path class="mt2" d="M20.95 19.45L23.55 16.80L27.85 16.80L25.25 19.45ZM20.95 27.85L23.55 25.20L27.85 25.20L25.25 27.85ZM25.15 19.45L27.75 16.80L32.05 16.80L29.45 19.45Z"/><path class="mf" d="M-0.05 15.15H4.25V19.45H-0.05ZM-0.05 19.35H4.25V23.65H-0.05ZM-0.05 23.55H4.25V27.85H-0.05ZM-0.05 27.75H4.25V32.05H-0.05ZM-0.05 31.95H4.25V36.25H-0.05ZM4.15 15.15H8.45V19.45H4.15ZM4.15 19.35H8.45V23.65H4.15ZM4.15 23.55H8.45V27.85H4.15ZM4.15 27.75H8.45V32.05H4.15ZM4.15 31.95H8.45V36.25H4.15ZM4.15 36.15H8.45V40.45H4.15ZM8.35 15.15H12.65V19.45H8.35ZM8.35 19.35H12.65V23.65H8.35ZM8.35 23.55H12.65V27.85H8.35ZM8.35 27.75H12.65V32.05H8.35ZM8.35 31.95H12.65V36.25H8.35ZM8.35 36.15H12.65V40.45H8.35ZM12.55 15.15H16.85V19.45H12.55ZM12.55 19.35H16.85V23.65H12.55ZM12.55 23.55H16.85V27.85H12.55ZM12.55 27.75H16.85V32.05H12.55ZM12.55 31.95H16.85V36.25H12.55ZM12.55 36.15H16.85V40.45H12.55ZM16.75 15.15H21.05V19.45H16.75ZM16.75 19.35H21.05V23.65H16.75ZM16.75 23.55H21.05V27.85H16.75ZM16.75 27.75H21.05V32.05H16.75ZM16.75 31.95H21.05V36.25H16.75Z"/><path class="mfd" d="M20.95 19.35H25.25V23.65H20.95ZM20.95 27.75H25.25V32.05H20.95ZM25.15 19.35H29.45V23.65H25.15ZM25.15 23.55H29.45V27.85H25.15ZM25.15 27.75H29.45V32.05H25.15Z"/><g opacity=".45"><path fill="#a7abb6" d="M12.55 6.75L15.20 4.15L15.20 8.45L12.55 11.05ZM16.75 2.55L19.40 -0.05L19.40 4.25L16.75 6.85ZM25.15 6.75L27.80 4.15L27.80 8.45L25.15 11.05ZM29.35 2.55L32.00 -0.05L32.00 4.25L29.35 6.85Z"/><path fill="#ffffff" d="M8.35 6.85L10.95 4.20L15.25 4.20L12.65 6.85ZM12.55 2.65L15.15 0.00L19.45 0.00L16.85 2.65ZM20.95 6.85L23.55 4.20L27.85 4.20L25.25 6.85ZM25.15 2.65L27.75 0.00L32.05 0.00L29.45 2.65Z"/><path fill="#e9eaee" d="M8.35 6.75H12.65V11.05H8.35ZM12.55 2.55H16.85V6.85H12.55ZM20.95 6.75H25.25V11.05H20.95ZM25.15 2.55H29.45V6.85H25.15Z"/></g></svg>
+      </div>
+      <div class="jar" id="jar">
+        <div class="jar-start">
+          <p class="jar-title"><span data-l="es">Donar con Ko-fi</span><span data-l="en">Donate with Ko-fi</span></p>
+          <p class="jar-text"><span data-l="es">Eliges el monto y Ko-fi se encarga del pago, sin salir de esta página.</span><span data-l="en">You choose the amount and Ko-fi takes care of the payment, without leaving this page.</span></p>
+          <button class="btn btn-main" type="button" id="jar-open"><span data-l="es">Hacer una donación</span><span data-l="en">Make a donation</span></button>
+          <a class="jar-link" href="https://ko-fi.com/havikunn"><span data-l="es">O ábrelo en ko-fi.com/havikunn</span><span data-l="en">Or open it at ko-fi.com/havikunn</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block socials" id="redes">
+    <div class="wrap">
+      <h2><span data-l="es">Redes</span><span data-l="en">Social media</span></h2>
+      <p class="intro"><span data-l="es">Soy Havikun y desarrollo Havi Hub. En mis redes subo videos y clips de gaming, por si quieres seguirme.</span><span data-l="en">I'm Havikun, and I make Havi Hub. I post gaming videos and clips on my social media if you'd like to follow along.</span></p>
+      <ul class="social-row">
+        <li class="s-main"><a class="social social-main" href="https://linktr.ee/havikunn" rel="me noopener" style="--brand:#43e55e"><span class="social-top"><span class="tile" style="background:#43e55e;color:#0e0f12"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m13.73635 5.85251 4.00467-4.11665 2.3248 2.3808-4.20064 4.00466h5.9085v3.30473h-5.9365l4.22865 4.10766-2.3248 2.3338L12.0005 12.099l-5.74052 5.76852-2.3248-2.3248 4.22864-4.10766h-5.9375V8.12132h5.9085L3.93417 4.11666l2.3248-2.3808 4.00468 4.11665V0h3.4727zm-3.4727 10.30614h3.4727V24h-3.4727z"/></svg></span></span><span class="social-text"><span class="social-name">Linktree</span><span class="social-handle">linktr.ee/havikunn</span></span><span class="social-cta"><span data-l="es">Abrir Linktree</span><span data-l="en">Open Linktree</span><span class="social-arrow" aria-hidden="true">↗</span></span></a></li>
+        <li class="s-yt"><a class="social" href="https://www.youtube.com/@havikun" rel="me noopener" style="--brand:#ff0033"><span class="tile" style="background:#ff0033;color:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span class="social-text"><span class="social-name">YouTube</span><span class="social-handle">@havikun</span><span class="social-tag"><span data-l="es">Videos</span><span data-l="en">Videos</span></span></span><span class="social-arrow" aria-hidden="true">↗</span></a></li>
+        <li><a class="social" href="https://www.twitch.tv/havikun" rel="me noopener" style="--brand:#9146ff"><span class="tile" style="background:#9146ff;color:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></span><span class="social-text"><span class="social-name">Twitch</span><span class="social-handle">@havikun</span><span class="social-tag"><span data-l="es">Directos</span><span data-l="en">Streams</span></span></span><span class="social-arrow" aria-hidden="true">↗</span></a></li>
+        <li><a class="social" href="https://x.com/havikun" rel="me noopener" style="--brand:#e7e9ea"><span class="tile" style="background:#e7e9ea;color:#0e0f12"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></span><span class="social-text"><span class="social-name">X (Twitter)</span><span class="social-handle">@havikun</span><span class="social-tag"><span data-l="es">Novedades</span><span data-l="en">Updates</span></span></span><span class="social-arrow" aria-hidden="true">↗</span></a></li>
+        <li><a class="social" href="https://www.instagram.com/havikunn/" rel="me noopener" style="--brand:#e4405f"><span class="tile" style="background:#e4405f;color:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span><span class="social-text"><span class="social-name">Instagram</span><span class="social-handle">@havikunn</span><span class="social-tag"><span data-l="es">Fotos</span><span data-l="en">Photos</span></span></span><span class="social-arrow" aria-hidden="true">↗</span></a></li>
+        <li><a class="social" href="https://www.tiktok.com/@havikunn" rel="me noopener" style="--brand:#fe2c55"><span class="tile" style="background:#fe2c55;color:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span><span class="social-text"><span class="social-name">TikTok</span><span class="social-handle">@havikunn</span><span class="social-tag"><span data-l="es">Clips cortos</span><span data-l="en">Short clips</span></span></span><span class="social-arrow" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="links">
+        <a href="https://github.com/havihub/HaviHub"><span data-l="es">Código en GitHub</span><span data-l="en">Source code on GitHub</span></a>
+        <a href="https://github.com/havihub/HaviHub/issues"><span data-l="es">Reportar un problema</span><span data-l="en">Report a problem</span></a>
+        <a href="/privacy/"><span data-l="es">Privacidad</span><span data-l="en">Privacy</span></a>
+        <a href="/code-signing-policy/">Code signing policy</a>
+        <a href="/changelog/">Changelog</a>
+        <a href="https://github.com/havihub/HaviHub/blob/main/LICENSE"><span data-l="es">Licencia GPL-3.0</span><span data-l="en">GPL-3.0 license</span></a>
+        <a href="https://linktr.ee/havikunn"><span data-l="es">Hecho por Havikun</span><span data-l="en">Made by Havikun</span></a>
+      </div>
+      <div class="lang-menu"><button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list"><svg class="globe" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5Z"/></g></svg><span data-l="es">Idioma</span><span data-l="en">Language</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m7 10 5 5 5-5"/></svg></button><ul class="lang-list" id="lang-list" aria-label="Idioma" data-en-aria-label="Language"><li><button type="button" data-lang-pick="es" lang="es" aria-pressed="true">Español</button></li><li><button type="button" data-lang-pick="en" lang="en" aria-pressed="false">English</button></li></ul></div>
+    </div>
+    <p class="legal">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
+    <p class="legal"><span data-l="es">Havi Hub no está afiliado ni respaldado por el proyecto Prism Launcher, CurseForge (Overwolf) ni Modrinth. Sus nombres se usan solo para indicar de dónde viene cada contenido. Minecraft es una marca de Mojang AB.</span><span data-l="en">Havi Hub is not affiliated with or endorsed by the Prism Launcher project, CurseForge (Overwolf) or Modrinth. Their names are only used to show where content comes from. Minecraft is a trademark of Mojang AB.</span></p>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Capturas" data-en-aria-label="Screenshots" tabindex="-1">
+  <div class="lb-bg"></div>
+  <div class="lb-stage"><img class="lb-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" draggable="false"></div>
+  <div class="lb-bar lb-ui">
+    <p class="lb-count" aria-live="polite"></p>
+    <div class="lb-tools">
+      <button class="lb-btn" type="button" data-lb-out aria-label="Alejar" data-en-aria-label="Zoom out"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M5 12h14"/></svg></button>
+      <button class="lb-zoom" type="button" data-lb-fit aria-label="Ajustar a la pantalla" data-en-aria-label="Fit to screen">100%</button>
+      <button class="lb-btn" type="button" data-lb-in aria-label="Acercar" data-en-aria-label="Zoom in"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M5 12h14M12 5v14"/></svg></button>
+      <span class="lb-sep" aria-hidden="true"></span>
+      <button class="lb-btn" type="button" data-lb-close aria-label="Cerrar" data-en-aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <button class="lb-nav lb-prev lb-ui" type="button" data-lb-prev aria-label="Captura anterior" data-en-aria-label="Previous screenshot"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m14.5 5-7 7 7 7"/></svg></button>
+  <button class="lb-nav lb-next lb-ui" type="button" data-lb-next aria-label="Captura siguiente" data-en-aria-label="Next screenshot"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m9.5 5 7 7-7 7"/></svg></button>
+  <p class="lb-cap lb-ui"></p>
+</dialog>
+</body>
+</html>
